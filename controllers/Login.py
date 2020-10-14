@@ -4,17 +4,16 @@ from flask import current_app, jsonify, request
 from models.User import UserModel
 from flask_restful import Resource, reqparse
 import bcrypt
+import jwt
 
+class Login(Resource):
+    def __init__(self):
+        self.user = UserModel()
 
-class User(Resource):
-    # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
     def post(self):
-
         try:
-        # Validate form
+            # Validate form
             parser = reqparse.RequestParser()
-            parser.add_argument(
-                'name', type=str, required=True, location='json')
             parser.add_argument(
                 'email', type=str, required=True, location='json')
             parser.add_argument(
@@ -29,15 +28,9 @@ class User(Resource):
                 "message": "Missing some required field."
             })"""
 
-
-        user = {
-            'name': body['name'],
-            'password':  bcrypt.hashpw(body['password'].encode('utf-8'), bcrypt.gensalt(14)),
-            'email': body['email']
-        }
-
-
-        b =  UserModel()
-        b.insert(user)
-        
-        return jsonify({"respond": True})
+        user = self.user.getByEmail(body['email'])
+         
+        if not bcrypt.checkpw(body['password'].encode('utf-8'), user['password']):
+            return " 404"
+        else:
+            return True
