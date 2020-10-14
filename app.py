@@ -11,15 +11,17 @@ load_dotenv()
 
 from controllers.Boat import Boat
 from controllers.User import User
+from controllers.Login import Login
 
 
 app = Flask(__name__)
 app.mongo = MongoClient(os.getenv("MONGO_URL"))
 api = Api(app, prefix="/api/v1")
-
+##
 api.add_resource(Boat, '/boat/new')
 api.add_resource(User, '/user/new')
 
+api.add_resource(Login,'/login')
 
 if __name__ == '__main__':
     app.run(debug=os.getenv("DEBUG"))
