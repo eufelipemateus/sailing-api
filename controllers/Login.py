@@ -5,6 +5,11 @@ from models.User import UserModel
 from flask_restful import Resource, reqparse
 import bcrypt
 import jwt
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 class Login(Resource):
     def __init__(self):
@@ -29,8 +34,17 @@ class Login(Resource):
             })"""
 
         user = self.user.getByEmail(body['email'])
-         
+
         if not bcrypt.checkpw(body['password'].encode('utf-8'), user['password']):
-            return " 404"
+            return " 4000"
         else:
-            return True
+
+            del user['password']
+            token = jwt.encode(
+                user,
+                os.getenv("APP_SECRET")
+            )
+
+            return jsonify({'jwt': token, "staus": True})
+
+            
