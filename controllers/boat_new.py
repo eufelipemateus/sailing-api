@@ -5,7 +5,7 @@ from models.Boat import BoatModel
 from flask_restful import Resource, reqparse
 
 
-class Boat(Resource):
+class BoatNew(Resource):
     # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
     @jwt_required
     def post(self):
@@ -32,7 +32,6 @@ class Boat(Resource):
                 "error": "F001",
                 "message": "Missing some required field."
             })"""
-
 
 
         b =  BoatModel()
