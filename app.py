@@ -14,6 +14,10 @@ from controllers.boat_new import BoatNew
 from controllers.boat_update import BoatUpdate
 from controllers.boat_get import BoatGet
 from controllers.boat_get_list import BoatGetList
+from controllers.boat_service_new import BoatServiceNew
+from controllers.boat_service_get import BoatServiceGet
+from controllers.boat_service_get_list import BoatServiceGetList
+from controllers.boat_service_remove import BoatServiceRemove
 from controllers.User import User
 from controllers.Login import Login
 
@@ -31,6 +35,10 @@ api.add_resource(BoatNew, '/boat/new')
 api.add_resource(BoatUpdate, '/boat/update')
 api.add_resource(BoatGet, '/boat/get/<string:boat_id>')
 api.add_resource(BoatGetList, '/boat/getList')
+api.add_resource(BoatServiceNew, '/boat/service/new/<string:boat_id>')
+api.add_resource(BoatServiceGet, '/boat/service/get/<string:service_id>')
+api.add_resource(BoatServiceGetList, '/boat/service/get/list/<string:boat_id>')
+api.add_resource(BoatServiceRemove,'/boat/service/remove/<string:service_id>')
 
 api.add_resource(Login,'/login')
 
