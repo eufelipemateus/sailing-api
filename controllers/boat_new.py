@@ -1,4 +1,4 @@
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 from flask import current_app, jsonify, request
 from models.Boat import BoatModel
@@ -35,6 +35,8 @@ class BoatNew(Resource):
 
 
         b =  BoatModel()
+        current_user = get_jwt_identity()
+        body['user_id'] = current_user['sub']['id']
         b.insert(body)
         
         return jsonify({"respond": True})
