@@ -1,28 +1,25 @@
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 from flask import current_app, jsonify, request
-from models.Boat import BoatModel
 from flask_restful import Resource, reqparse
+from models.Image import ImageModel
+from werkzeug.datastructures import FileStorage
+from gridfs import GridFS
 
 
-class Boat(Resource):
-    # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
-    #@jwt_required
-    def post(self):
+class BoatImageNew(Resource):
 
+    @jwt_required
+    def post(self, boat_id):
         try:
         # Validate form
             parser = reqparse.RequestParser()
             parser.add_argument(
-                'name', type=str, required=True, location='json')
+                'name', type=str, required=True)
             parser.add_argument(
-                'location', type=str, required=True, location='json')
+                'description', type=str, required=True)
             parser.add_argument(
-                'size', type=str, required=True, location='json')
-            parser.add_argument(
-                'description', type=str, required=True, location='json')
-            parser.add_argument(
-                'price', type=str, required=True, location='json')
+                'image', type=FileStorage, location='files')
             body = parser.parse_args()
         except ValueError:
             print(f"[Error] {ValueError}")
@@ -34,8 +31,19 @@ class Boat(Resource):
             })"""
 
 
+        fs = GridFS( current_app.mongo['db'])
+        image_id = fs.put(body['image'], content_type=body['image'].content_type, filename= body['name'])
+        
+        image_body = {
+            "image_id":image_id,
+            "name": body['name'],
+            "description": body['description'],
+            "boat_id": boat_id
+        }
 
-        b =  BoatModel()
-        b.insert(body)
+
+
+        b =  ImageModel()
+        b.insert(image_body)
         
         return jsonify({"respond": True})

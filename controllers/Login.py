@@ -1,4 +1,4 @@
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import create_access_token
 from flask_restful import Resource
 from flask import current_app, jsonify, request
 from models.User import UserModel
@@ -7,6 +7,7 @@ import bcrypt
 import jwt
 from dotenv import load_dotenv
 import os
+import datetime
 
 
 load_dotenv()
@@ -40,11 +41,13 @@ class Login(Resource):
         else:
 
             del user['password']
-            token = jwt.encode(
-                user,
-                os.getenv("APP_SECRET")
-            )
 
-            return jsonify({'jwt': token, "staus": True})
+            payload = {
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5605),
+                'iat': datetime.datetime.utcnow(),
+                'sub': user
+            }
+            jwt_token = create_access_token(payload, expires_delta=False)
+            return jsonify({'jwt_token': jwt_token, "status": True})
 
             
