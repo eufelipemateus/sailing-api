@@ -7,6 +7,8 @@ from pymongo import MongoClient
 from json import dumps
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
+
 
 load_dotenv()
 
@@ -50,6 +52,9 @@ api.add_resource(Login,'/login')
 
 #jwt
 jwt = JWTManager(app)
+
+#Cors
+cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
 
 if __name__ == '__main__':
     app.run(debug=os.getenv("DEBUG"))
