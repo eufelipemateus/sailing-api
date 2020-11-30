@@ -42,7 +42,6 @@ class BoatImageNew(Resource):
         }
 
 
-
         b =  ImageModel()
         b.insert(image_body)
         

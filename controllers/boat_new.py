@@ -3,7 +3,7 @@ from flask_restful import Resource
 from flask import current_app, jsonify, request
 from models.Boat import BoatModel
 from flask_restful import Resource, reqparse
-
+import json
 
 class BoatNew(Resource):
     # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
@@ -37,6 +37,6 @@ class BoatNew(Resource):
         b =  BoatModel()
         current_user = get_jwt_identity()
         body['user_id'] = current_user['sub']['id']
-        b.insert(body)
-        
-        return jsonify({"respond": True})
+        boatId = b.insert(body)
+
+        return jsonify({"respond": True, "boatId": str(boatId)})

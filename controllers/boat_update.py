@@ -1,4 +1,4 @@
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 from flask import current_app, jsonify, request
 from models.Boat import BoatModel
@@ -33,9 +33,11 @@ class BoatUpdate(Resource):
                 "error": "F001",
                 "message": "Missing some required field."
             })"""
-
+        current_user = get_jwt_identity()
+           
         b =  BoatModel()
         b.update(
+            user_id=current_user['sub']['id'],
             boat_id=body['boat_id'],
             boat={
                 'name':body['name'],
