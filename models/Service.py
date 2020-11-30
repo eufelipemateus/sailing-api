@@ -17,3 +17,7 @@ class ServiceModel():
 
     def remove(self, service_id):
         return current_app.mongo['db']['Services'].delete_one({'_id':ObjectId(service_id)})
+
+    def update(self, service_id, service):
+        current_app.mongo['db']['Services'].update_one({'_id':ObjectId(service_id)},  {"$set": service })
+        return prepare(current_app.mongo['db']['Services'].find_one({'_id':ObjectId(service_id)}))

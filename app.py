@@ -18,6 +18,7 @@ from controllers.boat_get import BoatGet
 from controllers.boat_get_list import BoatGetList
 from controllers.boat_service_new import BoatServiceNew
 from controllers.boat_service_get import BoatServiceGet
+from controllers.boat_service_update import BoatServiceUpdate
 from controllers.boat_service_get_list import BoatServiceGetList
 from controllers.boat_service_remove import BoatServiceRemove
 from controllers.boat_image_new import BoatImageNew
@@ -44,6 +45,7 @@ api.add_resource(BoatServiceNew, '/boat/service/new/<string:boat_id>')
 api.add_resource(BoatServiceGet, '/boat/service/get/<string:service_id>')
 api.add_resource(BoatServiceGetList, '/boat/service/get/list/<string:boat_id>')
 api.add_resource(BoatServiceRemove,'/boat/service/remove/<string:service_id>')
+api.add_resource(BoatServiceUpdate, '/boat/service/update/<string:service_id>')
 api.add_resource(BoatImageGet, '/boat/image/get/<string:boat_image_id>')
 api.add_resource(BoatImageNew, '/boat/image/new/<string:boat_id>')
 api.add_resource(BoatImageRemove, '/boat/image/remove/<string:boat_image_id>')
