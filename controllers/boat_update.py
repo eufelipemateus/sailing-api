@@ -8,12 +8,10 @@ from flask_restful import Resource, reqparse
 class BoatUpdate(Resource):
     # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
     @jwt_required
-    def post(self):
+    def post(self, boat_id):
         try:
         # Validate form
             parser = reqparse.RequestParser()
-            parser.add_argument(
-                'boat_id', type=str, required=True, location='json')
             parser.add_argument(
                 'name', type=str, required=True, location='json')
             parser.add_argument(
@@ -38,7 +36,7 @@ class BoatUpdate(Resource):
         b =  BoatModel()
         b.update(
             user_id=current_user['sub']['id'],
-            boat_id=body['boat_id'],
+            boat_id=boat_id,
             boat={
                 'name':body['name'],
                 'location': body['location'],

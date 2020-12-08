@@ -5,6 +5,9 @@ from flask_restful import Resource, reqparse
 from models.Image import ImageModel
 from werkzeug.datastructures import FileStorage
 from gridfs import GridFS
+from bson.objectid import ObjectId
+from utils.return_response import return_error_json, return_json
+from utils.prepare import prepareImage
 
 
 class BoatImageNew(Resource):
@@ -24,12 +27,11 @@ class BoatImageNew(Resource):
         except ValueError:
             print(f"[Error] {ValueError}")
              # Returns error
-            """  return return_error_json(status=400, json= {
+            return return_error_json(status=400, json= {
                 "status": False,
                 "error": "F001",
                 "message": "Missing some required field."
-            })"""
-
+            })
 
         fs = GridFS( current_app.mongo['db'])
         image_id = fs.put(body['image'], content_type=body['image'].content_type, filename= body['name'])
@@ -38,11 +40,10 @@ class BoatImageNew(Resource):
             "image_id":image_id,
             "name": body['name'],
             "description": body['description'],
-            "boat_id": boat_id
+            "boat_id": ObjectId(boat_id)
         }
 
-
         b =  ImageModel()
-        b.insert(image_body)
-        
-        return jsonify({"respond": True})
+        _id = b.insert(image_body)
+
+        return b.get(_id)

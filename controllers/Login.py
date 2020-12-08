@@ -51,14 +51,10 @@ class Login(Resource):
             })
         else:
 
+            #Don't remove this line is dangerous.
             del user['password']
 
-            payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5605),
-                'iat': datetime.datetime.utcnow(),
-                'sub': user
-            }
-            jwt_token = create_access_token(payload, expires_delta=False)
-            return return_json({'jwt_token': jwt_token, "status": True})
+            jwt_token = create_access_token(identity=user)
+            return return_json({'acess_token': jwt_token, "status": True})
 
             

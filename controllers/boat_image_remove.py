@@ -15,7 +15,6 @@ class BoatImageRemove(Resource):
         fs = GridFS( current_app.mongo['db'])
         
         image = i.get(boat_image_id)
-        image['image_id']
 
         fs.delete(image['image_id'])
         i.remove(boat_image_id)

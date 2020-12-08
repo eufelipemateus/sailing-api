@@ -24,8 +24,12 @@ from controllers.boat_service_remove import BoatServiceRemove
 from controllers.boat_image_new import BoatImageNew
 from controllers.boat_image_get import BoatImageGet
 from controllers.boat_image_remove import BoatImageRemove
+from controllers.boat_image_get_list import BoatImageGetList
+from controllers.boat_image_update import BoatImageUpdate
+
 from controllers.User import User
 from controllers.Login import Login
+from controllers.token_refresh import TokenRefresh
 
 
 app = Flask(__name__)
@@ -38,7 +42,7 @@ api = Api(app, prefix="/api/v1")
 api.add_resource(User, '/user/new')
 
 api.add_resource(BoatNew, '/boat/new')
-api.add_resource(BoatUpdate, '/boat/update')
+api.add_resource(BoatUpdate, '/boat/update/<string:boat_id>')
 api.add_resource(BoatGet, '/boat/get/<string:boat_id>')
 api.add_resource(BoatGetList, '/boat/getList')
 api.add_resource(BoatServiceNew, '/boat/service/new/<string:boat_id>')
@@ -49,8 +53,12 @@ api.add_resource(BoatServiceUpdate, '/boat/service/update/<string:service_id>')
 api.add_resource(BoatImageGet, '/boat/image/get/<string:boat_image_id>')
 api.add_resource(BoatImageNew, '/boat/image/new/<string:boat_id>')
 api.add_resource(BoatImageRemove, '/boat/image/remove/<string:boat_image_id>')
+api.add_resource(BoatImageGetList, '/boat/image/get/list/<string:boat_id>')
+api.add_resource(BoatImageUpdate, '/boat/image/update/<string:boat_image_id>')
+
 
 api.add_resource(Login,'/login')
+#api.add_resource(TokenRefresh, '/refresh-token' )
 
 #jwt
 jwt = JWTManager(app)
