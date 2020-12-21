@@ -58,7 +58,7 @@ api.add_resource(BoatImageUpdate, '/boat/image/update/<string:boat_image_id>')
 
 
 api.add_resource(Login,'/login')
-#api.add_resource(TokenRefresh, '/refresh-token' )
+api.add_resource(TokenRefresh, '/refresh-token' )
 
 #jwt
 jwt = JWTManager(app)

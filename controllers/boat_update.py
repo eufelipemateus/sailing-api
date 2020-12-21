@@ -32,10 +32,10 @@ class BoatUpdate(Resource):
                 "message": "Missing some required field."
             })"""
         current_user = get_jwt_identity()
-           
+        
         b =  BoatModel()
         b.update(
-            user_id=current_user['sub']['id'],
+            user_id=current_user['id'],
             boat_id=boat_id,
             boat={
                 'name':body['name'],

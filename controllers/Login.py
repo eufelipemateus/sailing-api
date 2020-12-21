@@ -1,4 +1,4 @@
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token
 from flask_restful import Resource
 from flask import current_app, jsonify, request
 from models.User import UserModel
@@ -55,6 +55,12 @@ class Login(Resource):
             del user['password']
 
             jwt_token = create_access_token(identity=user)
-            return return_json({'acess_token': jwt_token, "status": True})
+            refresh_token = create_refresh_token(identity=user)
+
+            return return_json({
+                'acess_token': jwt_token,
+                'refresh_token': refresh_token,
+                "status": True
+            })
 
             
