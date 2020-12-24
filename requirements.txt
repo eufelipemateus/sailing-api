@@ -9,7 +9,7 @@ marshmallow-sqlalchemy==0.13.2
 psycopg2==2.7.5
 aniso8601==1.2.0
 appdirs==1.4.0
-click==6.7
+click==7.1.2
 Flask-Jsonpify==1.5.0
 itsdangerous==0.24
 Jinja2==2.9.5
