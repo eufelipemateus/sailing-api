@@ -8,7 +8,7 @@ from gridfs import GridFS
 
 class BoatImageRemove(Resource):
 
-    @jwt_required
+    @jwt_required()
     def delete(self, boat_image_id):
 
         i =  ImageModel()

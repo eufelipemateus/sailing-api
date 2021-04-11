@@ -7,7 +7,7 @@ from flask_restful import Resource, reqparse
 
 class BoatUpdate(Resource):
     # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
-    @jwt_required
+    @jwt_required()
     def post(self, boat_id):
         try:
         # Validate form

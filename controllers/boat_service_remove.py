@@ -6,7 +6,7 @@ from flask_restful import Resource, reqparse
 
 class BoatServiceRemove(Resource):
 
-    @jwt_required
+    @jwt_required()
     def delete(self, service_id):
         b =  ServiceModel()
         b.remove(service_id)

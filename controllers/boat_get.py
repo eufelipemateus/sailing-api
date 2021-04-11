@@ -7,7 +7,7 @@ from utils.prepare import prepare
 
 class BoatGet(Resource):
 
-    @jwt_required
+    @jwt_required()
     def get(self, boat_id):
         b =  BoatModel()
         boat = b.get(boat_id)

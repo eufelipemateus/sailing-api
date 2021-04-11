@@ -20,4 +20,5 @@ class BoatModel():
             return False
 
     def get_boats(self):
-        return [prepare(n) for n in current_app.mongo['db']['Boats'].find()]
+       return [prepare(n) for n in current_app.mongo['db']['Boats'].find()]
+       

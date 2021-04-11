@@ -7,7 +7,7 @@ from models.Service import ServiceModel
 
 class BoatServiceNew(Resource):
 
-    @jwt_required
+    @jwt_required()
     def post(self, boat_id):
 
         try:

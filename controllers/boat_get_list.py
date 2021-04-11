@@ -6,7 +6,7 @@ from flask_restful import Resource, reqparse
 
 class BoatGetList(Resource):
 
-    @jwt_required
+    @jwt_required()
     def get(self):
         b =  BoatModel()
         return b.get_boats()

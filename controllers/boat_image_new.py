@@ -12,7 +12,7 @@ from utils.prepare import prepareImage
 
 class BoatImageNew(Resource):
 
-    @jwt_required
+    @jwt_required()
     def post(self, boat_id):
         try:
         # Validate form

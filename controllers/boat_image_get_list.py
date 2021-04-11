@@ -9,7 +9,7 @@ from utils.return_response import return_error_json, return_json
 
 class BoatImageGetList(Resource):
 
-    @jwt_required
+    @jwt_required()
     def get(self, boat_id):
         b =  ImageModel()
         images =b.get_images(boat_id)

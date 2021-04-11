@@ -7,7 +7,7 @@ import json
 
 class BoatNew(Resource):
     # Example http://127.0.0.1:5000/value/<boardid>/<sensorid>/value
-    @jwt_required
+    @jwt_required()
     def post(self):
 
         try:

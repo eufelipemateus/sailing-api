@@ -8,7 +8,7 @@ from utils.return_response import return_error_json, return_json
 
 class BoatImageUpdate(Resource):
     
-    @jwt_required
+    @jwt_required()
     def post(self, boat_image_id):
 
         try:
