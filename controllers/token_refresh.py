@@ -6,7 +6,7 @@ class TokenRefresh(Resource):
     Token Refresh Api
     """
 
-    @jwt_required()(refresh=True)
+    @jwt_required(refresh=True)
     def post(self):
 
         # Generating new access token
