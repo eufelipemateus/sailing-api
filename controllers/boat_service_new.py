@@ -1,4 +1,4 @@
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 from flask import current_app, jsonify, request
 from flask_restful import Resource, reqparse
@@ -28,4 +28,14 @@ class BoatServiceNew(Resource):
             })"""
 
         s =  ServiceModel()
-        return s.insert({'service': body['service'], 'type': body['type'], "boat_id": boat_id})
+
+        current_user = get_jwt_identity()
+
+        if current_user['id'] :
+            return s.insert({'service': body['service'], 'type': body['type'], "boat_id": boat_id})
+        else :
+             return return_error_json(status=401, json= {
+                "status": False,
+                "error": "F003",
+                "message": "Not Authenticated!!"
+            })

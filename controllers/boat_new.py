@@ -36,7 +36,7 @@ class BoatNew(Resource):
 
         b =  BoatModel()
         current_user = get_jwt_identity()
-        body['user_id'] = current_user['sub']['id']
+        body['user_id'] = current_user['id']
         boatId = b.insert(body)
 
         return jsonify({"respond": True, "boatId": str(boatId)})

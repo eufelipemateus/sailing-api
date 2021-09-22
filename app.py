@@ -64,7 +64,7 @@ api.add_resource(TokenRefresh, '/refresh-token' )
 jwt = JWTManager(app)
 
 #Cors
-cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
+cors = CORS(app, resources={r"/api/*": {"origins": os.getenv("ORIGIN_URL") }})
 
 if __name__ == '__main__':
     app.run(debug=os.getenv("DEBUG"))
