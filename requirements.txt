@@ -23,3 +23,4 @@ bcrypt==3.2.0
 PyJWT==2.4.0
 Flask-JWT-Extended==4.0.0
 
+mako>=1.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
